@@ -1,10 +1,11 @@
 import { AppError } from '../../common/errors/AppError.js';
-import { hashPassword } from '../../common/utils/password.js';
+import { generateAccessToken } from '../../common/utils/jwt.js';
+import { hashPassword, verifyPassword } from '../../common/utils/password.js';
 import {
   userRepository,
   UserRepository,
 } from '../users/user.repository.js';
-import type { RegisterInput } from './auth.validation.js';
+import type { LoginInput, RegisterInput } from './auth.validation.js';
 
 export class AuthService {
   constructor(private readonly users: UserRepository) {}
@@ -36,6 +37,47 @@ export class AuthService {
       createdAt: user.createdAt,
     };
   }
-}
+   async login(input: LoginInput) {
+    const user = await this.users.findByEmail(
+      input.email,
+    );
 
+    if (!user) {
+      throw new AppError(
+        'Invalid email or password',
+        401,
+        'INVALID_CREDENTIALS',
+      );
+    }
+
+    const isPasswordValid =
+      await verifyPassword(
+        input.password,
+        user.passwordHash,
+      );
+
+    if (!isPasswordValid) {
+      throw new AppError(
+        'Invalid email or password',
+        401,
+        'INVALID_CREDENTIALS',
+      );
+    }
+
+    const accessToken = generateAccessToken({
+      userId: user._id.toString(),
+      role: user.role,
+    });
+
+    return {
+      accessToken,
+      user: {
+        id: user._id.toString(),
+        userName: user.userName,
+        email: user.email,
+        role: user.role,
+      },
+    };
+}
+}
 export const authService = new AuthService(userRepository);

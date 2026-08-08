@@ -9,6 +9,7 @@ export interface IUser {
   role: UserRole;
   createdAt: Date;
   updatedAt: Date;
+  interests: string[];
 }
 
 export type UserDocument = HydratedDocument<IUser>;
@@ -41,6 +42,10 @@ const userSchema = new Schema<IUser>(
       enum: ['user', 'admin'],
       default: 'user',
       required: true,
+    },
+       interests: {
+      type: [String],
+      default: [],
     },
 
   

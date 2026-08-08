@@ -27,6 +27,7 @@ export const registerSchema = z.object({
     .regex(gmailRegex, 'Only Gmail addresses are allowed'),
 
   password: passwordSchema,
+  interests:z.array(z.string().trim().min(1, 'Interest cannot be empty')).optional(),
 });
 
 export const loginSchema = z.object({
