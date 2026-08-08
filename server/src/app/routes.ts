@@ -1,12 +1,25 @@
 import { Router } from 'express';
 import authRoutes from '../modules/auth/auth.routes.js';
-const router = Router();
+import interestsRoutes from '../modules/aggregations/interests/interests.routes.js';
+import noteRoutes from '../modules/notes/note.routes.js';
+import userPostsRoutes from '../modules/aggregations/user-posts/user-posts.routes.js';
+const _ = Router();
 
-router.get('/', (_req, res) => {
+_.get('/', (_req, res) => {
   res.status(200).json({
     success: true,
     message: 'User Note API is running',
   });
 });
-router.use('/auth', authRoutes);
-export { router as routes };
+_.use('/auth', authRoutes);
+_.use('/notes', noteRoutes);
+_.use(
+  '/admin/users/interests',
+  interestsRoutes,
+);
+
+_.use(
+  '/users',
+  userPostsRoutes,
+);
+export { _ as routes };

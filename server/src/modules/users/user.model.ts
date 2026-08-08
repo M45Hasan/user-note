@@ -59,5 +59,8 @@ userSchema.index(
   { email: 1 },
   { unique: true },
 );
+userSchema.index({
+  interests: 1,
+});
 
 export const User = model<IUser>('User', userSchema);
