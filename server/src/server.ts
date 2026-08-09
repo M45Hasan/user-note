@@ -16,7 +16,7 @@ const startServer = async (): Promise<void> => {
 startServer().catch((error: unknown) => {
   logger.error(
     {
-      err: error,
+      err: error, 
     },
     'Failed to start server',
   );

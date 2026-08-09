@@ -12,7 +12,7 @@ const _ = Router();
 const api = process.env.BASE_URL_V1 || "";
 console.log("SERVER_URL:", process.env.SERVER_URL);
 console.log({ api });
-
+ 
 _.use(api, routes);
 
 _.use(api, (req: Request, res: Response) => {
