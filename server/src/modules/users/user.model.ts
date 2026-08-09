@@ -62,5 +62,8 @@ userSchema.index(
 userSchema.index({
   interests: 1,
 });
+userSchema.index({
+  createdAt: -1,
+});
 
 export const User = model<IUser>('User', userSchema);

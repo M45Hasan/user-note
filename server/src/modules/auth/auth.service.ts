@@ -27,6 +27,7 @@ export class AuthService {
       userName: input.userName,
       email: input.email,
       passwordHash,
+      interests: input.interests || [],
     });
 
     return {

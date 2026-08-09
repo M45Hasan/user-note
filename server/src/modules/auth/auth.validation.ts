@@ -28,6 +28,7 @@ export const registerSchema = z.object({
 
   password: passwordSchema,
   interests:z.array(z.string().trim().min(1, 'Interest cannot be empty')).optional(),
+  role: z.enum(['user', 'admin']).default('user'),
 });
 
 export const loginSchema = z.object({
