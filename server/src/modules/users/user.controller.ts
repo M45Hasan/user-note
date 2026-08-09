@@ -87,7 +87,7 @@ export class UserController {
   try {
     const user =
       await this.users.findById(
-        req.params.id,
+        req.params.id as string,
       );
 
     if (!user) {
