@@ -122,7 +122,7 @@ export const getNote = async (
   try {
     const { userId, role } =
       getAuthUser(req);
-
+console.log(userId,role);
     const note =
       await noteService.getNote(
         req.params.id as string,
