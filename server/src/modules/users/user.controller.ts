@@ -10,6 +10,7 @@ import {
   userRepository,
   UserRepository,
 } from './user.repository.js';
+import { Note } from '../notes/note.model.js';
 
 export class UserController {
   constructor(
@@ -79,32 +80,32 @@ export class UserController {
    * Admin gets a single user.
    */
   async getUser(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): Promise<void> {
-    try {
-      const user =
-        await this.users.findById(
-          req.params.id as string,
-        );
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> {
+  try {
+    const user =
+      await this.users.findById(
+        req.params.id,
+      );
 
-      if (!user) {
-        throw new AppError(
-          'User not found',
-          404,
-          'USER_NOT_FOUND',
-        );
-      }
-
-      res.status(200).json({
-        success: true,
-        data: user,
-      });
-    } catch (error) {
-      next(error);
+    if (!user) {
+      throw new AppError(
+        'User not found',
+        404,
+        'USER_NOT_FOUND',
+      );
     }
+
+    res.status(200).json({
+      success: true,
+      data: user,
+    });
+  } catch (error) {
+    next(error);
   }
+}
 
   /**
    * Admin updates a user.
@@ -160,7 +161,9 @@ export class UserController {
           'USER_NOT_FOUND',
         );
       }
+// delete user's all notes when user is deleted
 
+await Note.deleteMany({ userId: req.params.id });
       res.status(200).json({
         success: true,
         message: 'User deleted successfully',

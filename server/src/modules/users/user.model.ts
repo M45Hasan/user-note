@@ -43,12 +43,11 @@ const userSchema = new Schema<IUser>(
       default: 'user',
       required: true,
     },
-       interests: {
+
+    interests: {
       type: [String],
       default: [],
     },
-
-  
   },
   {
     timestamps: true,
@@ -59,11 +58,27 @@ userSchema.index(
   { email: 1 },
   { unique: true },
 );
+
 userSchema.index({
   interests: 1,
 });
 userSchema.index({
   createdAt: -1,
 });
+
+userSchema.virtual('notes', {
+  ref: 'Note',
+  localField: '_id',
+  foreignField: 'userId',
+});
+
+userSchema.set('toJSON', {
+  virtuals: true,
+});
+
+userSchema.set('toObject', {
+  virtuals: true,
+});
+
 
 export const User = model<IUser>('User', userSchema);

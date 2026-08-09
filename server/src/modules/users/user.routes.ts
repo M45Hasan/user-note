@@ -7,7 +7,7 @@ import { validate } from '../../common/middleware/validate.middleware.js';
 import {
   createUserSchema,
   updateUserSchema,
-  userIdSchema,
+  
 } from './user.validation.js';
 
 import { userController } from './user.controller.js';
@@ -36,7 +36,7 @@ _.get(
 
 _.get(
   '/:id',
-  validate(userIdSchema),
+  
   userController.getUser.bind(
     userController,
   ),
@@ -44,7 +44,7 @@ _.get(
 
 _.patch(
   '/:id',
-  validate(userIdSchema),
+ 
   validate(updateUserSchema),
   userController.updateUser.bind(
     userController,
@@ -53,7 +53,7 @@ _.patch(
 
 _.delete(
   '/:id',
-  validate(userIdSchema),
+ 
   userController.deleteUser.bind(
     userController,
   ),

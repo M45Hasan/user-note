@@ -38,7 +38,7 @@ export const loginSchema = z.object({
     .toLowerCase()
     .regex(gmailRegex, 'Only Gmail addresses are allowed'),
 
-  password: z.string().min(1, 'Password is required'),
+  password: passwordSchema,
 });
 
 export type RegisterInput = z.infer<typeof registerSchema>;

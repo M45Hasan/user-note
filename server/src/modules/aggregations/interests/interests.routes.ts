@@ -7,13 +7,13 @@ import {
   getUsersGroupedByInterests,
 } from './interests.controller.js';
 
-const router = Router();
+const _ = Router();
 
-router.get(
+_.get(
   '/',
   authenticate,
   authorize('admin'),
   getUsersGroupedByInterests,
 );
 
-export default router;
+export default _;

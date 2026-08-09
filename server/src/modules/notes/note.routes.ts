@@ -40,20 +40,20 @@ _.get(
 
 _.get(
   '/:id',
-  validate(noteIdSchema),
+ 
   getNote,
 );
 
 _.patch(
   '/:id',
-  validate(noteIdSchema),
+ 
   validate(updateNoteSchema),
   updateNote,
 );
 
 _.delete(
   '/:id',
-  validate(noteIdSchema),
+  
   deleteNote,
 );
 

@@ -22,6 +22,7 @@ export class AuthService {
     }
 
     const passwordHash = await hashPassword(input.password);
+    
 
     const user = await this.users.create({
       userName: input.userName,
@@ -38,10 +39,17 @@ export class AuthService {
       createdAt: user.createdAt,
     };
   }
+
+
+
    async login(input: LoginInput) {
+   
     const user = await this.users.findByEmail(
       input.email,
     );
+   
+    console.log({user});
+    
 
     if (!user) {
       throw new AppError(
@@ -50,12 +58,12 @@ export class AuthService {
         'INVALID_CREDENTIALS',
       );
     }
+   const isPasswordValid =
+  await verifyPassword(
+    input.password,
+    user.passwordHash,
+  );
 
-    const isPasswordValid =
-      await verifyPassword(
-        input.password,
-        user.passwordHash,
-      );
 
     if (!isPasswordValid) {
       throw new AppError(

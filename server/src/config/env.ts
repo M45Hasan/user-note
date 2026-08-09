@@ -13,6 +13,7 @@ const envSchema = z.object({
   JWT_SECRET: z.string().min(6, 'JWT_SECRET must be at least 6 characters'),
 
   JWT_EXPIRES_IN: z.string().default('7d'),
+  CLIENT_URL: z.string().url('CLIENT_URL must be a valid URL'),
 
   LOG_LEVEL: z
     .enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent'])
