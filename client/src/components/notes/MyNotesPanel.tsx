@@ -30,9 +30,7 @@ interface MyNotesPanelProps {
 
 type NoteTab = 'mine' | 'public';
 
-export default function MyNotesPanel({
-    user,
-}: MyNotesPanelProps) {
+export default function MyNotesPanel({ user }: MyNotesPanelProps) {
   const [tab, setTab] =
     useState<NoteTab>('mine');
 
@@ -183,7 +181,7 @@ export default function MyNotesPanel({
       setDeletingId(null);
     }
   };
-
+console.log(user);
   return (
     <div className="space-y-6">
       {error && (
