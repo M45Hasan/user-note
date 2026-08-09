@@ -6,7 +6,12 @@ import userPostsRoutes from '../modules/aggregations/user-posts/user-posts.route
 import adminUserRoutes from '../modules/users/user.routes.js';
 const _ = Router();
 
-
+_.get('/', (_req, res) => {
+  res.status(200).json({
+    success: false,
+    message: 'Api End Points are working',
+  });
+});
 _.use('/auth', authRoutes);
 _.use('/notes', noteRoutes);
 _.use(
