@@ -15,7 +15,7 @@ export default function NoteList({
   onDelete,
   deletingId,
 }: NoteListProps) {
-  if (notes.length === 0) {
+  if (notes?.length === 0) {
     return (
       <div className="rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center">
         <p className="text-sm text-slate-500">
@@ -27,7 +27,7 @@ export default function NoteList({
 
   return (
     <div className="space-y-4">
-      {notes.map((note) => (
+      {notes?.map((note) => (
         <NoteCard
           key={note._id}
           note={note}
