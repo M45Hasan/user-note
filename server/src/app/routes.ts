@@ -6,12 +6,7 @@ import userPostsRoutes from '../modules/aggregations/user-posts/user-posts.route
 import adminUserRoutes from '../modules/users/user.routes.js';
 const _ = Router();
 
-_.get('/', (_req, res) => {
-  res.status(200).json({
-    success: true,
-    message: 'User Note API is running',
-  });
-});
+
 _.use('/auth', authRoutes);
 _.use('/notes', noteRoutes);
 _.use(

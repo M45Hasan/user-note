@@ -41,6 +41,12 @@ app.get('/health', (_req, res) => {
   });
 });
 
+app.use('/', (_req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'User Note API is running',
+  });
+});
 
 app.use('/api/v1', routes);
 
